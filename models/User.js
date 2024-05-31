@@ -4,17 +4,17 @@ const userSchema = Schema(
   {
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    name: { type: true, required: true },
+    name: { type: String, required: true },
     level: { type: String, default: "customer" }, // 2types: CustomElementRegistry, admin
   },
   { timestamps: true }
 );
 userSchema.methods.toJSON = function () {
-  const obj = this._doc;
+  const obj = this.toObject();
   delete obj.password;
   delete obj.__v;
-  delete obj.updateAt;
-  delete obj.createAt;
+  delete obj.updatedAt;
+  delete obj.createdAt;
   return obj;
 };
 
